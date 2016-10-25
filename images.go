@@ -79,11 +79,12 @@ func ImagesHandlerGet(w http.ResponseWriter, r *http.Request) {
 // add image.
 func ImagesHandlerPost(w http.ResponseWriter, r *http.Request) {
 
-	clientuuid, err := r.Cookie("clientuuid")
+	cookie, err := r.Cookie("clientuuid")
 	if err != nil {
 		http.Error(w, "missing clientuuid cookie", 406)
 		return
 	}
+	clientuuid := cookie.Value
 
 	// first decode incoming JSON
 	var img imageEntry
